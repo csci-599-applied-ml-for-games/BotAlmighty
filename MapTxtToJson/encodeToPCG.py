@@ -8,8 +8,10 @@ level_count = 5
 
 for folder in listdir(output_folder):
 	if folder!='.DS_Store':
+		print(folder)
 		for ifile in listdir(output_folder + '/' + folder):
 			if ifile!='.DS_Store':
+				print(level_count)
 				output_file_path = '../PCG/src/levels/original/lvl-' + str(level_count) + '.txt'
 				output_file = open(output_file_path,'w')
 
