@@ -76,12 +76,12 @@ print("output")
 print(output)
 
 
-output_file = '../Output/output_markov.txt'
+output_file = '../Output/Markov/output_markov.txt'
 ofile = open(output_file,'w')
 for line in output:
     for element in line:
         ofile.write(element)
-    ofile.write("\n")=
+    ofile.write("\n")
 
 
 
