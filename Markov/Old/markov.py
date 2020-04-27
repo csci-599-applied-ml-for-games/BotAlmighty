@@ -39,7 +39,6 @@ imglines = [ raw_line_data(line) for line in lines if len(line) > width ]
 height = len(imglines)
 header = lines[:-height]
 
-# reversed because building from bottom to top and right to left works better
 imglines = imglines[::-1]
 
 def adjacent(data, x, y):
@@ -48,17 +47,12 @@ def adjacent(data, x, y):
     leftleft  = data[y  ][x-2] if 1 < x            else None
     aboveleft = data[y-1][x-1] if above and left   else None
     return above, left, leftleft, aboveleft
-
-# build markov chains
-
 table = {}
 
 for y, line in enumerate(imglines):
     for x, pixel in enumerate(line):
         key = (y,) + adjacent(imglines, x, y)
         table.setdefault(key, []).append(pixel)
-
-# generate output
 
 output = []
 
@@ -67,9 +61,6 @@ for y in range(height):
     for x in range(width):
         key = (y,) + adjacent(output, x, y)
         output[-1].append(random.choice(table.get(key, bgpixel)))
-
-# un-reverse only vertically -- but leave horizontal alone.  why does this work
-# best?  who the hell knows?
 
 output = output[::-1]
 print("output")
