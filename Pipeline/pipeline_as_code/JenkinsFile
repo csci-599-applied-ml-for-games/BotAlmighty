@@ -1,0 +1,105 @@
+pipeline {
+    agent any 
+    stages {
+        stage('Load workspace - Input map') { 
+            steps {
+                echo 'Reading input map'
+                sh 'cp ~/VSCodeProjects/USC_CSCI599/Jenkins/input_maps/input_map.txt ./input_maps/'
+                echo 'Reading input map finished'
+            }
+        }
+        stage('Markov model') { 
+            steps {
+                echo 'Running Markov model'
+                sh '''
+                    cd models/markov
+                    python ./mario_markov.py
+                    cp output_level/output_markov.txt ../../output_text/
+                '''
+                echo 'Markov model processing finished'
+            }
+        }
+        stage('RNN model') { 
+            steps {
+                echo 'Running LSTM model'
+                sh '''
+                    cd models/rnn/torch-rnn-master/
+                    th sample.lua -checkpoint cv/checkpoint_1000.t7 -length 2000 -gpu -1pwd
+                '''
+                echo 'Model loaded'
+                sh '''
+                    cd scripts/
+                    python parse_transpose_levels.py
+                '''
+                echo 'Map generated'
+            }
+        }
+        stage('PCG model') { 
+            steps {
+                echo 'Running PCG model'
+                sh '''
+                    cd models/pcg/src/
+                    javac GenerateLevel.java
+                    java GenerateLevel
+                    cp GeneratedLevels/newLevel.txt ../../../output_text/output_pcg.txt
+                '''
+                echo 'PCG model processing finished'
+            }
+        }
+        stage('Text to JSON process') { 
+            steps {
+                echo 'Converting Text outputs to JSON outputs'
+                sh 'python ./scripts/text_to_json.py'
+                echo 'Conversion from Text outputs to JSON outputs complete.'
+                echo 'JSON output location: /output_json/'
+            }
+        }
+        stage('Evaluate map metrics') { 
+            steps {
+                echo 'Map Evaluation for generated maps'
+                script {
+                    output_var = sh (script: 'python ./scripts/metrics_evaluation.py', returnStdout: true)
+                    model_val = output_var[-2]
+                }
+                echo "${output_var}"
+                echo 'Map evaluation finished'
+            }
+        }
+        stage('Write selected map') { 
+            steps {
+                echo 'Writing selected map'
+                script {
+                    if ("${model_val}" == '0') {
+                        echo "Selected map: Markov"
+                        echo "Writing to location emulator_files/levels/"
+                        sh 'cp output_json/output_markov.json emulator_files/levels/Level8-1.json'
+                    }
+                    if ("${model_val}" == '1') {
+                        echo "Selected map: RNN"
+                        echo "Writing to location emulator_files/levels/"
+                        sh 'cp output_json/output_rnn.json emulator_files/levels/Level8-1.json'
+                    }
+                    if ("${model_val}" == '2') {
+                        echo "Selected map: PCG"
+                        echo "Writing to location emulator_files/levels/"
+                        sh 'cp output_json/output_pcg.json emulator_files/levels/Level8-1.json'
+                    }
+                }
+                sh 'cp output_json/output_pcg.json ~/VSCodeProjects/USC_CSCI599/Models/LevelGeneration/Game/levels/Level8-1.json'
+                echo 'Writing selected map finished'
+                echo 'Selected map location: emulator_files/levels/'
+            }
+        }
+        stage('Initiate Emulator') { 
+            steps {
+                echo 'Initiating emulator'
+                sh '''
+                    pip install pygame
+                    cd emulator_files
+                    pwd
+                    python main.py
+                '''
+            }
+        }
+    }
+}
