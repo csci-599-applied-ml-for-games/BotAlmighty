@@ -173,7 +173,7 @@ public class MarioGame {
      * @return statistics about the current game
      */
     public MarioResult runGame(MarioAgent agent, String level, int timer, int marioState, boolean visuals) {
-        return this.runGame(agent, level, timer, marioState, visuals, visuals ? 10 : 0, 2);
+        return this.runGame(agent, level, timer, marioState, visuals, visuals ? 40 : 0, 2);
     }
 
     /**
