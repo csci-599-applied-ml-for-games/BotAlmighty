@@ -5,14 +5,14 @@
 
 <b>Project Report link : </b>
 
-**Project Video link : **
+<b>Project Video link : </b>
 
 **LinkedIn links:**
 
-**Pavleen Kaur: **
-**Pritish Rawal: **
-**Shashank Misra: **
-**Tridha Chaudhuri: **
+<b>Pavleen Kaur: </b> <br>
+<b>Pritish Rawal: </b><br>
+<b>Shashank Misra: </b><br>
+<b>Tridha Chaudhuri: </b><br>
 
 
 
