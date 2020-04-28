@@ -1,7 +1,7 @@
-## CSCI 599 : Machine Learning for Games project 
+# CSCI 599 : Machine Learning for Games project 
 
-# Project name : Dynamic level Generation of Games
-# Team Name : BotAlmighty
+### Project name : Dynamic level Generation of Games
+### Team Name : BotAlmighty
 
 
 
