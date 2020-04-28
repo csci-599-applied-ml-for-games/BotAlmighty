@@ -3,10 +3,12 @@
 ### Project name : Dynamic level Generation of Games
 ### Team Name : BotAlmighty
 
-**Project Report link :**
+**Project Report link : **
+
 **Project Video link : **
 
 **LinkedIn links:**
+
 **Pavleen Kaur: **
 **Pritish Rawal: **
 **Shashank Misra: **
