@@ -3,23 +3,14 @@
 ### Project name : Dynamic level Generation of Games
 ### Team Name : BotAlmighty
 
-<b>Project Report link : </b>
+<h2>Team Members</h2>
+Pavleen Kaur<br>
+Pritish Rawal<br>
+Shashank Misra<br>
+Tridha Chaudhuri<br>
 
-<b>Project Video link : </b>
-
-**LinkedIn links:**
-
-<b>Pavleen Kaur: </b> <br>
-<b>Pritish Rawal: </b><br>
-<b>Shashank Misra: </b><br>
-<b>Tridha Chaudhuri: </b><br>
-
-
-
-
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
+<h3>Overview of the Project</h3>
+Games tend to get boring for the players when they are too easy. On the other hand, it can get too frustrating when it’s too hard. Games with the greatest entertainment value are those in which the level matches the skills of the human player. This means that one of the core elements of good game design is to make the game just as difficult as it has to be, so that the player feels challenged enough, but not too much. Moreover, manually creating maps for games is expensive and time-consuming. Delegating map generation to an algorithmic process can save developers time and money, or even allow novel forms of gameplay.     <br>
+The goal for our CSCI-599 project is exactly that. To take a childhood game such as Mario, and bring it back to our lives by introducing levels that are interesting, intriguing, and dynamically difficult by automating map generation for levels. 
 
 
